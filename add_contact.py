@@ -125,8 +125,8 @@ def import_contacts(batch_id: str):
         lead_info = {
             "First Name": str(first_name) if first_name else '',
             "Last Name": str(last_name) if last_name else '',
-            "Lead Email": email.split(';')[0].strip(),
-            "contract_page_url":offer_code_url,
+            "Lead Email": str(email).strip(),
+            "contract_page_url": str(offer_code_url),
             "manufacturer": str(manufacturer) if manufacturer else '',
             "department": str(department) if department else '',
             "campaign_date": campaign_start_date.strftime("%m/%d/%Y") if campaign_start_date else '',

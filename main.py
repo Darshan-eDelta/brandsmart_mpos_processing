@@ -142,7 +142,12 @@ def update_data(df: pd.DataFrame, batch_id: int):
         raise
 def process_mpos_data():
     """Orchestrates the entire process using the global SQLAlchemy engine."""
+    # General query
     query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1'")
+    # August query
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE inbound_batch_id = '21'")
+    # September query
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1' and inbound_batch_id = '23'")
     
     try:
         df = pd.read_sql(query, ENGINE.connect())

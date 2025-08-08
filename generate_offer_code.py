@@ -1,7 +1,7 @@
 # generate_offer_code.py
 import random
 import sys
-
+from log import log
 # --- Refactored Imports ---
 from sqlalchemy import create_engine, text
 from conn import get_db_connection_string # Use the new connection logic
@@ -92,9 +92,9 @@ def generate_offer_code(n: int) -> list:
         # Add the valid codes to our final set
         final_codes.update(valid_codes)
         
-        print(f"Generated {len(valid_codes)} new valid codes. Total collected: {len(final_codes)}/{n}")
+        log.info(f"Generated {len(valid_codes)} new valid codes. Total collected: {len(final_codes)}/{n}")
 
-    print(f"Finished. Total generated unique offer codes: {len(final_codes)}")
+    log.info(f"Finished. Total generated unique offer codes: {len(final_codes)}")
     return list(final_codes)
 
 
