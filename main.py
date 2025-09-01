@@ -83,7 +83,7 @@ def update_data(df: pd.DataFrame, batch_id: int):
     upload_df['offer_code_url'] = update_tasks.apply(
         lambda row: offer_code_url_f(row.get('dealer_id'), row.get('offer_code')), axis=1
     )
-    upload_df['needs_python_proccess'] = 2
+    upload_df['needs_python_proccess'] = 0
 
     # Use the specified static temporary table name
     temp_table_name = "temp_update_mpos_remove"
@@ -143,11 +143,17 @@ def update_data(df: pd.DataFrame, batch_id: int):
 def process_mpos_data():
     """Orchestrates the entire process using the global SQLAlchemy engine."""
     # General query
-    query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1'")
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1'")
     # August query
     # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE inbound_batch_id = '21'")
     # September query
-    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1' and inbound_batch_id = '23'")
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1' and inbound_batch_id = '61'")
+    # October query
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1' and inbound_batch_id = '63'")
+    # November query
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1' and inbound_batch_id = '65'")
+    # December query
+    # query = text("SELECT id, landing_page_offer_code, dealer_id, invoice_number FROM mpos_post_sale_marketing WHERE needs_python_proccess = '1' and inbound_batch_id = '67'")
     
     try:
         df = pd.read_sql(query, ENGINE.connect())
